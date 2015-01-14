@@ -69,6 +69,10 @@
 </div>
 ```
 
+##体验
+
+![](http://wechatui.github.io/swiper/images/example.jpg)
+
 ##License
 
 swiper is available under the terms of the [MIT License](http://www.opensource.org/licenses/mit-license.php).
