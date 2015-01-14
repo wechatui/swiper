@@ -49,7 +49,7 @@
         this.$container.style['width'] = w + 'px';
         this.$container.style['height'] = h + 'px';
 
-        [].forEach.call(this.$items, function ($item) {
+        Array.prototype.forEach.call(this.$items, function ($item) {
             $item.style['width'] = width + 'px';
             $item.style['height'] = height + 'px';
         });
@@ -160,7 +160,7 @@
      * @private
      */
     Swiper.prototype._addClass = function (items) {
-        [].forEach.call(items, function (item) {
+        Array.prototype.forEach.call(items, function (item) {
             var clazz = item.getAttribute('toggle-class').split(/\s+/);
             for (var i = 0; i < clazz.length; i++) {
                 var obj = clazz[i];
@@ -175,7 +175,7 @@
      * @private
      */
     Swiper.prototype._removeClass = function (items) {
-        [].forEach.call(items, function (item) {
+        Array.prototype.forEach.call(items, function (item) {
             var clazz = item.getAttribute('toggle-class').split(/\s+/);
             for (var i = 0; i < clazz.length; i++) {
                 var obj = clazz[i];
