@@ -164,7 +164,11 @@
             var clazz = item.getAttribute('toggle-class').split(/\s+/);
             for (var i = 0; i < clazz.length; i++) {
                 var obj = clazz[i];
-                item.classList.add(obj);
+                if(item.classList){
+                    item.classList.add(obj);
+                }else if (item.className.split(/\s+/).indexOf(obj) === -1){
+                    item.className += ' ' + obj;
+                }
             }
         });
     };
@@ -179,7 +183,11 @@
             var clazz = item.getAttribute('toggle-class').split(/\s+/);
             for (var i = 0; i < clazz.length; i++) {
                 var obj = clazz[i];
-                item.classList.remove(obj);
+                if (item.classList){
+                    item.classList.remove(obj);
+                }else if(item.className.split(/\s+/).indexOf(obj) !== -1){
+                    item.className = item.className.replace(new RegExp( '\\s*'+ obj, "g" ), '');
+                }
             }
         });
     };
@@ -220,6 +228,6 @@
      * export
      * @type {Swiper}
      */
-    window.Swiper = Swiper;
+    w.Swiper = Swiper;
 
 })(window, document);
