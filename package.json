@@ -1,0 +1,15 @@
+{
+  "name": "swiper",
+  "version": "0.0.1",
+  "description": "swiper.js",
+  "author": "wechat ui team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weui/swiper.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "~3.8.10",
+    "gulp-uglify": "^1.0.2"
+  }
+}
