@@ -185,8 +185,8 @@
                 var obj = clazz[i];
                 if (item.classList){
                     item.classList.remove(obj);
-                }else if(item.className.split(/\s+/).indexOf(obj) !== -1){
-                    item.className = item.className.replace(new RegExp( '\\s*'+ obj, "g" ), '');
+                }else{
+                    item.className = item.className.replace(new RegExp( '\\s*'+ obj, 'g' ), '');
                 }
             }
         });
