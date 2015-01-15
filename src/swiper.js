@@ -22,8 +22,11 @@
         this._eventHandlers = {};
 
         this.$container = d.querySelector(this._options.container);
-        this.$items = d.querySelectorAll(this._options.item);
+        this.$items = this.$container.querySelectorAll(this._options.item);
         this.count = this.$items.length;
+
+        this._width = this.$container.offsetWidth;
+        this._height = this.$container.offsetHeight;
 
         this._init();
         this._bind();
@@ -34,8 +37,9 @@
      * @private
      */
     Swiper.prototype._init = function(){
-        var width = d.documentElement.clientWidth;
-        var height = d.documentElement.clientHeight;
+
+        var width = this._width;
+        var height = this._height;
 
 
         var w = width;
@@ -138,14 +142,14 @@
      * @private
      */
     Swiper.prototype._show = function (index) {
-        this._offset = index * d.documentElement.clientHeight;
+        this._offset = index * this._height;
         var transform = 'translate3d(0, -' + this._offset + 'px, 0)';
 
         if (this._options.direction === 'horizontal'){
-            this._offset = index * d.documentElement.clientWidth;
+            this._offset = index * this._width;
             transform = 'translate3d(-' + this._offset + 'px, 0, 0)';
         }
-        
+
         var duration = this._options.duration + 'ms';
 
         this.$container.style['-webkit-transition'] = duration;
