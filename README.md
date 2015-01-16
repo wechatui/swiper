@@ -6,7 +6,7 @@
 
 - 在<https://github.com/wechatui/swiper/releases>下载最新发布的版本
 
-- 使用`bower`进行安装，运行`bower install light-swiper`
+- 使用`bower`进行安装，运行`bower install iswiper`
 
 ##用法
 
