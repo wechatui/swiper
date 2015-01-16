@@ -25,13 +25,13 @@
 
 **option完整参数如下：**
 
-- `container`：String，容器选择器，默认值`.container`
+- `container`：String，容器选择器，默认值`.swiper`
 
 - `item`：String，每一屏的选择器，默认值`.item`
 
 - `direction`：String，滑动方向，默认值`vertical`；横向滑动时为`horizontal`
 
-- `threshold`：Number，滑动距离阀值，默认值`80`，当按住屏幕滑动超过此距离，松开手时，自动滑到下一屏，否则不滑动
+- `threshold`：Number，滑动距离阀值，默认值`50`，当按住屏幕滑动超过此距离，松开手时，自动滑到下一屏，否则不滑动
 
 - `duration`：Number，滑屏动画时间，单位`ms`，默认值`300`；数值越小，滑动越快，越刺激
 
