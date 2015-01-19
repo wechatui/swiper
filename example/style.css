@@ -7,7 +7,7 @@ body {
   height: 100%;
   overflow: hidden;
 }
-.container {
+.swiper {
   height: 100%;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
