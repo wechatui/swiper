@@ -1,6 +1,6 @@
 ##swiper
 
-为移动端而生的滑动框架，无依赖，轻盈小巧
+为移动端而生的滑动框架，无依赖，轻盈小巧，性能极致
 
 ##安装
 
@@ -11,7 +11,7 @@
 ##用法
 
 ```html
-<div class="container">
+<div class="swiper">
     <div class="item item1">
         <h1 class="bear" toggle-class="slide_in">bear</h1>
     </div>
@@ -63,7 +63,7 @@
 举例：
 
 ```html
-<div class="container">
+<div class="swiper">
     <div class="item item1">
         <!-- 当出现第一屏时，自动为以下元素添加“slide_in”类，当滑动到下一屏时，自动移除 -->
         <h1 class="bear" toggle-class="slide_in">bear</h1>
