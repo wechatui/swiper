@@ -10,7 +10,7 @@
      * @constructor
      */
     function Swiper(options){
-        this.version = '1.0.0';
+        this.version = '1.0.1';
         this._default = {container: '.swiper', item: '.item', direction: 'vertical', threshold: 50, duration: 300};
         this._options = extend(this._default, options);
         this._start = {};
@@ -232,6 +232,12 @@
      * export
      * @type {Swiper}
      */
-    w.Swiper = Swiper;
+    if (typeof define === 'function' && define.amd){
+        define([], function () {
+            return Swiper;
+        });
+    }else {
+        w.Swiper = Swiper;
+    }
 
 })(window, document);
