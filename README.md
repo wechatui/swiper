@@ -25,6 +25,17 @@
 </script>
 ```
 
+同样，也`swiper.js`也支持`AMD`规范，可以用`requirejs`进行加载。
+
+```html
+<script src="path/to/require.js"></script>
+<script>
+    require(['swiper'], function(Swiper){
+        var swiper = new Swiper({direction: 'horizontal'});
+    });
+</script>
+```
+
 ##API
 
 ###Swiper([option])
