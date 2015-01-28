@@ -16,7 +16,7 @@
         this._start = {};
         this._move = {};
         this._end = {};
-        this._last = 0;
+        this._prev = 0;
         this._current = 0;
         this._offset = 0;
         this._eventHandlers = {};
@@ -101,7 +101,7 @@
                 distance = me._end.x - me._start.x;
             }
 
-            me._last = me._current;
+            me._prev = me._current;
             if (distance > me._options.threshold){
                 me._current = me._current === 0 ? 0 : --me._current;
             }else if (distance < - me._options.threshold){
@@ -120,11 +120,11 @@
                 return false;
             }
 
-            var last = me.$items[me._last].querySelectorAll('*[toggle-class]');
+            var last = me.$items[me._prev].querySelectorAll('*[toggle-class]');
             var current = me.$items[me._current].querySelectorAll('*[toggle-class]');
-            if (me._current != me._last) {
+            if (me._current != me._prev) {
                 var cb = me._eventHandlers['swiped'];
-                cb && cb.apply(me, [me._last, me._current]);
+                cb && cb.apply(me, [me._prev, me._current]);
 
                 me._addClass(current);
                 me._removeClass(last);

@@ -61,8 +61,8 @@
 
 ```javascript
     var swiper = new Siper();
-    swiper.on('swiped', function(last, current){
-        console.log('上一屏：', last); // 0
+    swiper.on('swiped', function(prev, current){
+        console.log('上一屏：', prev); // 0
         console.log('当前屏：', current); // 1
     });
 ```
