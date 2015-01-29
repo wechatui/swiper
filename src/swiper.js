@@ -50,12 +50,12 @@
             h = height;
         }
 
-        this.$container.style['width'] = w + 'px';
-        this.$container.style['height'] = h + 'px';
+        this.$container.style.width = w + 'px';
+        this.$container.style.height = h + 'px';
 
         Array.prototype.forEach.call(this.$items, function ($item) {
-            $item.style['width'] = width + 'px';
-            $item.style['height'] = height + 'px';
+            $item.style.width = width + 'px';
+            $item.style.width = height + 'px';
         });
     };
 
@@ -84,9 +84,9 @@
             }
 
             me.$container.style['-webkit-transition'] = '0';
-            me.$container.style['transition'] = '0';
+            me.$container.style.transition = '0';
             me.$container.style['-webkit-transform'] = transform;
-            me.$container.style['transform'] = transform;
+            me.$container.style.transform = transform;
 
             e.preventDefault();
         }, false);
@@ -123,8 +123,10 @@
             var last = me.$items[me._prev].querySelectorAll('*[toggle-class]');
             var current = me.$items[me._current].querySelectorAll('*[toggle-class]');
             if (me._current != me._prev) {
-                var cb = me._eventHandlers['swiped'];
-                cb && cb.apply(me, [me._prev, me._current]);
+                var cb = me._eventHandlers.swiped;
+                if (cb){
+                    cb.apply(me, [me._prev, me._current]);
+                }
 
                 me._addClass(current);
                 me._removeClass(last);
@@ -153,9 +155,9 @@
         var duration = this._options.duration + 'ms';
 
         this.$container.style['-webkit-transition'] = duration;
-        this.$container.style['transition'] = duration;
+        this.$container.style.transition = duration;
         this.$container.style['-webkit-transform'] = transform;
-        this.$container.style['transform'] = transform;
+        this.$container.style.transform = transform;
     };
 
     /**
