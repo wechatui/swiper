@@ -90,6 +90,8 @@
 
 ![](http://wechatui.github.io/swiper/images/example.jpg)
 
+![](http://wechatui.github.io/swiper/images/example2.jpg)
+
 ##License
 
 swiper is available under the terms of the [MIT License](http://www.opensource.org/licenses/mit-license.php).

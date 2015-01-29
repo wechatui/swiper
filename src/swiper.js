@@ -55,7 +55,7 @@
 
         Array.prototype.forEach.call(this.$items, function ($item) {
             $item.style.width = width + 'px';
-            $item.style.width = height + 'px';
+            $item.style.height = height + 'px';
         });
     };
 
