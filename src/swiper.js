@@ -2,7 +2,14 @@
  * Created by jfengjiang on 2015/1/13.
  */
 
-(function(w, d){
+
+(function(name, definition) {
+    if (typeof define === 'function'){
+        define(definition);
+    } else {
+        this[name] = definition();
+    }
+})('Swiper', function(){
 
     /**
      *
@@ -21,7 +28,7 @@
         this._offset = 0;
         this._eventHandlers = {};
 
-        this.$container = d.querySelector(this._options.container);
+        this.$container = document.querySelector(this._options.container);
         this.$items = this.$container.querySelectorAll(this._options.item);
         this.count = this.$items.length;
 
@@ -232,14 +239,6 @@
 
     /**
      * export
-     * @type {Swiper}
      */
-    if (typeof define === 'function' && define.amd){
-        define([], function () {
-            return Swiper;
-        });
-    }else {
-        w.Swiper = Swiper;
-    }
-
-})(window, document);
+    return Swiper;
+});

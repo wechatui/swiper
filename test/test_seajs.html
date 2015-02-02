@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>test for swiper.js</title>
+    <link rel="stylesheet" href="./mocha.css"/>
+</head>
+<body>
+<div id="mocha"></div>
+<script src="./sea.js"></script>
+<script>
+    seajs.config({
+        alias: {
+            'swiper': '../dist/swiper'
+        }
+    });
+    seajs.use(['swiper', 'chai', 'mocha'], function (Swiper) {
+        mocha.setup({ui: 'bdd', ignoreLeaks: true});
+        var assert = chai.assert;
+        describe('Swiper', function () {
+            it('Swiper should have create', function () {
+                assert.isFunction(Swiper, 'Swiper is a function');
+            });
+        });
+        mocha.run();
+    });
+</script>
+</body>
+</html>

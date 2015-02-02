@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>test for swiper.js</title>
+    <link rel="stylesheet" href="./mocha.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+        .swiper {
+            height: 100%;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        .item {
+            height: 100%;
+            background-position: center center;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+            float: left;
+        }
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transition: all 0.6s ease-out;
+            -moz-transition: all 0.6s ease-out;
+            -o-transition: all 0.6s ease-out;
+            transition: all 0.6s ease-out;
+            color: #ffffff;
+        }
+        .hehe,
+        .xx {
+            -webkit-transform: translate3d(-999px, -50%, 0);
+            -moz-transform: translate3d(-999px, -50%, 0);
+            -o-transform: translate3d(-999px, -50%, 0);
+            -ms-transform: translate3d(-999px, -50%, 0);
+            transform: translate3d(-999px, -50%, 0);
+        }
+        .bear,
+        .xixi {
+            -webkit-transform: translate3d(999px, -50%, 0);
+            -moz-transform: translate3d(999px, -50%, 0);
+            -o-transform: translate3d(999px, -50%, 0);
+            -ms-transform: translate3d(999px, -50%, 0);
+            transform: translate3d(999px, -50%, 0);
+        }
+        .slide_in {
+            -webkit-transform: translate3d(-50%, -50%, 0);
+            -moz-transform: translate3d(-50%, -50%, 0);
+            -o-transform: translate3d(-50%, -50%, 0);
+            -ms-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+        }
+        .item1 {
+            background-color: black;
+        }
+        .item2 {
+            background-color: darkgreen;
+        }
+        .item3 {
+            background-color: #303030;
+        }
+        .item4 {
+            background-color: #4285f4;
+        }
+    </style>
+    <style>
+        #mocha{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: #ffffff;
+            z-index: 99;
+        }
+        #mocha-stats{
+            top: auto;
+            bottom: 100px;
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div id="mocha"></div>
+<div class="swiper">
+    <div class="item item1">
+        <h1 class="bear" toggle-class="slide_in">bear</h1>
+    </div>
+
+    <div class="item item2">
+        <h1 class="hehe" toggle-class="slide_in">kiki</h1>
+    </div>
+
+    <div class="item item3">
+        <h1 class="xixi" toggle-class="slide_in">xx</h1>
+    </div>
+
+    <div class="item item4">
+        <h1 class="xx" toggle-class="slide_in">jf</h1>
+    </div>
+</div>
+<script src="./chai.js"></script>
+<script src="./mocha.js"></script>
+<script src="../dist/swiper.js"></script>
+<script>
+    mocha.setup({ui: 'bdd'});
+    var assert = chai.assert;
+
+    describe('Swiper', function () {
+        it('Swiper should have create', function () {
+            assert.isFunction(Swiper, 'Swiper is a function');
+        });
+
+        it('I do not know do what', function () {
+            var swiper = new Swiper();
+            var $slider = document.querySelector('.swiper');
+        });
+    });
+
+    mocha.run();
+</script>
+</body>
+</html>
