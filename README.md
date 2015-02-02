@@ -36,6 +36,20 @@
 </script>
 ```
 
+```html
+<script src="path/to/sea.js"></script>
+<script>
+    seajs.use(['swiper'], function(Swiper){
+        var swiper = new Swiper();
+    });
+    //define(function(require, exports, module){
+    //    var Swiper = require('Swiper');
+    //    var swiper = new Swiper();
+    //    //do something
+    //});
+</script>
+```
+
 ##API
 
 ###Swiper([option])
