@@ -17,7 +17,7 @@
      * @constructor
      */
     function Swiper(options){
-        this.version = '1.0.1';
+        this.version = '1.1.0';
         this._default = {container: '.swiper', item: '.item', direction: 'vertical', threshold: 50, duration: 300};
         this._options = extend(this._default, options);
         this._start = {};
