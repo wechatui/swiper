@@ -27,6 +27,7 @@
         this._current = 0;
         this._offset = 0;
         this._eventHandlers = {};
+        this._cache = {};
 
         this.$container = document.querySelector(this._options.container);
         this.$items = this.$container.querySelectorAll(this._options.item);
@@ -44,25 +45,26 @@
      * @private
      */
     Swiper.prototype._init = function(){
-
-        var width = this._width;
-        var height = this._height;
+        var me = this;
+        var width = me._width;
+        var height = me._height;
 
 
         var w = width;
-        var h = height * this.count;
+        var h = height * me.count;
 
-        if(this._options.direction === 'horizontal'){
-            w = width * this.count;
+        if(me._options.direction === 'horizontal'){
+            w = width * me.count;
             h = height;
         }
 
-        this.$container.style.width = w + 'px';
-        this.$container.style.height = h + 'px';
+        me.$container.style.width = w + 'px';
+        me.$container.style.height = h + 'px';
 
-        Array.prototype.forEach.call(this.$items, function ($item) {
+        Array.prototype.forEach.call(me.$items, function ($item, key) {
             $item.style.width = width + 'px';
             $item.style.height = height + 'px';
+            me._getItems(key);
         });
     };
 
@@ -127,8 +129,8 @@
                 return false;
             }
 
-            var last = me.$items[me._prev].querySelectorAll('*[toggle-class]');
-            var current = me.$items[me._current].querySelectorAll('*[toggle-class]');
+            var prev = me._getItems(me._prev);
+            var current = me._getItems(me._current);
             if (me._current != me._prev) {
                 var cb = me._eventHandlers.swiped;
                 if (cb){
@@ -136,13 +138,26 @@
                 }
 
                 me._addClass(current);
-                me._removeClass(last);
+                me._removeClass(prev);
             }else{
                 me._addClass(current);
             }
 
             e.preventDefault();
         }, false);
+    };
+
+    /**
+     * get toggle-class items
+     * @param key
+     * @returns {Array}
+     * @private
+     */
+    Swiper.prototype._getItems = function (key) {
+        if (!this._cache[key]){
+            this._cache[key] = this.$items[key].querySelectorAll('*[toggle-class]');
+        }
+        return this._cache[key];
     };
 
     /**
