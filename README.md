@@ -4,9 +4,9 @@
 
 ##安装
 
-- 在<https://github.com/wechatui/swiper/releases>下载最新发布的版本
+- 你可以在<https://github.com/wechatui/swiper/releases>下载最新发布的版本
 
-- 使用`bower`进行安装，运行`bower install iswiper`
+- 也可以使用`bower`进行安装，运行`bower install iswiper`
 
 ##用法
 
