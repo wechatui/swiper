@@ -190,12 +190,19 @@
     Swiper.prototype._addClass = function (items) {
         Array.prototype.forEach.call(items, function (item) {
             var clazz = item.getAttribute('toggle-class').split(/\s+/);
+            var delay = parseInt(item.getAttribute('data-delay') || 0);
             for (var i = 0; i < clazz.length; i++) {
                 var obj = clazz[i];
                 if(item.classList){
-                    item.classList.add(obj);
+                    (function(obj) {
+                        setTimeout(function () {
+                            item.classList.add(obj);
+                        }, delay)
+                    })(obj);
                 }else if (item.className.split(/\s+/).indexOf(obj) === -1){
-                    item.className += ' ' + obj;
+                    (function(obj) {
+                        item.className += ' ' + obj;
+                    })(obj);
                 }
             }
         });
