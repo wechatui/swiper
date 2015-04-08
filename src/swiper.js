@@ -228,6 +228,14 @@
     };
 
     /**
+     * show next page
+     */
+    Swiper.prototype.next = function () {
+        this._prev = this._current;
+        this._show(++this._current);
+    };
+
+    /**
      *
      * @param {String} event
      * @param {Function} callback
