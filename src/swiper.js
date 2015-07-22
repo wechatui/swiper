@@ -78,6 +78,10 @@
         this.$container.addEventListener('touchstart', function (e) {
             me._start.x = e.changedTouches[0].pageX;
             me._start.y = e.changedTouches[0].pageY;
+
+            me.$container.style['-webkit-transition'] = 'none';
+            me.$container.style.transition = 'none';
+
         }, false);
 
         this.$container.addEventListener('touchmove', function (e) {
@@ -92,8 +96,6 @@
                 transform = 'translate3d(' + (distance - me._offset) + 'px, 0, 0)';
             }
 
-            me.$container.style['-webkit-transition'] = '0';
-            me.$container.style.transition = '0';
             me.$container.style['-webkit-transform'] = transform;
             me.$container.style.transform = transform;
 
@@ -118,6 +120,8 @@
             }
 
             me._show(me._current);
+
+            e.preventDefault();
         }, false);
 
         this.$container.addEventListener('transitionEnd', function (e) {

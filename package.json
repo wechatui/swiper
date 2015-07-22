@@ -9,8 +9,10 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "better-assert": "^1.0.2",
     "gulp": "~3.8.10",
+    "gulp-jshint": "~1.9.0",
     "gulp-uglify": "^1.0.2",
-    "gulp-jshint": "~1.9.0"
+    "jsdom": "^5.6.1"
   }
 }
