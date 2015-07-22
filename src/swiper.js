@@ -193,22 +193,8 @@
      */
     Swiper.prototype._addClass = function (items) {
         Array.prototype.forEach.call(items, function (item) {
-            var clazz = item.getAttribute('toggle-class').split(/\s+/);
-            var delay = parseInt(item.getAttribute('data-delay') || 0);
-            for (var i = 0; i < clazz.length; i++) {
-                var obj = clazz[i];
-                if(item.classList){
-                    (function(obj) {
-                        setTimeout(function () {
-                            item.classList.add(obj);
-                        }, delay)
-                    })(obj);
-                }else if (item.className.split(/\s+/).indexOf(obj) === -1){
-                    (function(obj) {
-                        item.className += ' ' + obj;
-                    })(obj);
-                }
-            }
+            var clazz = item.getAttribute('toggle-class');
+            item.className += ' ' + clazz;
         });
     };
 
@@ -221,12 +207,7 @@
         Array.prototype.forEach.call(items, function (item) {
             var clazz = item.getAttribute('toggle-class').split(/\s+/);
             for (var i = 0; i < clazz.length; i++) {
-                var obj = clazz[i];
-                if (item.classList){
-                    item.classList.remove(obj);
-                }else{
-                    item.className = item.className.replace(new RegExp( '\\s*'+ obj, 'g' ), '');
-                }
+                item.className = item.className.replace(new RegExp( '\\s*'+ clazz[i], 'g' ), '');
             }
         });
     };

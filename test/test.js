@@ -18,7 +18,7 @@ describe('Swiper', function () {
     });
 
 
-    describe('swiper have the following methods:', function(){
+    describe('swiper should have the following methods:', function(){
         var methods = [
             '_init',
             '_bind',
@@ -42,7 +42,7 @@ describe('Swiper', function () {
 
     });
 
-    describe('swiper have the following properties', function(){
+    describe('swiper should have the following properties', function(){
         var properties = ['version', '_default', '_options', '_start', '_move', '_end', '_prev', '_current', '_offset', '_eventHandlers', '_cache',
         '$container', '$items', 'count', '_width', '_height'];
         for (var i = 0, len = properties.length; i < len; i++){
@@ -55,7 +55,38 @@ describe('Swiper', function () {
         }
     });
 
+    describe('it should add classes to dom', function(){
+        var $slider = swiper.$items[swiper._current];
+        var $items = $slider.querySelectorAll('*[toggle-class]');
+        Array.prototype.forEach.call($items, function($item, index){
+            var clazz = $item.getAttribute('toggle-class').split(/\s+/);
+            for(var i = 0, len = clazz.length; i < len; i++){
+                (function(i){
+                    it('.' + clazz, function(done){
+                        setTimeout(function(){
+                            assert($item.className.indexOf(clazz[i]) !== -1);
+                            done();
+                        }, 1000);
+                    });
+                })(i);
+            }
+        });
+    });
 
+    describe('.next()', function (){
+        it('should translateY the container to the slide height & should add classes to dom', function (){
+            assert(swiper.$container.style['-webkit-transform'] === '');
+
+            for(var i = 1, len = swiper.$items.length; i < len; i++){
+                swiper.next();
+                var height = swiper.$items[i].style['height'].replace('px', '');
+                var expect = 'translate3d(0px, -'+ (height * i) +'px, 0px)';
+
+                assert(swiper._current === i);
+                assert(swiper.$container.style['-webkit-transform'] === expect);
+            }
+        });
+    });
 });
 
 
