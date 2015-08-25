@@ -78,6 +78,10 @@
         this.$container.addEventListener('touchstart', function (e) {
             me._start.x = e.changedTouches[0].pageX;
             me._start.y = e.changedTouches[0].pageY;
+
+            me.$container.style['-webkit-transition'] = 'none';
+            me.$container.style.transition = 'none';
+
         }, false);
 
         this.$container.addEventListener('touchmove', function (e) {
@@ -92,8 +96,6 @@
                 transform = 'translate3d(' + (distance - me._offset) + 'px, 0, 0)';
             }
 
-            me.$container.style['-webkit-transition'] = '0';
-            me.$container.style.transition = '0';
             me.$container.style['-webkit-transform'] = transform;
             me.$container.style.transform = transform;
 
@@ -118,6 +120,8 @@
             }
 
             me._show(me._current);
+
+            e.preventDefault();
         }, false);
 
         this.$container.addEventListener('transitionEnd', function (e) {
@@ -189,22 +193,8 @@
      */
     Swiper.prototype._addClass = function (items) {
         Array.prototype.forEach.call(items, function (item) {
-            var clazz = item.getAttribute('toggle-class').split(/\s+/);
-            var delay = parseInt(item.getAttribute('data-delay') || 0);
-            for (var i = 0; i < clazz.length; i++) {
-                var obj = clazz[i];
-                if(item.classList){
-                    (function(obj) {
-                        setTimeout(function () {
-                            item.classList.add(obj);
-                        }, delay)
-                    })(obj);
-                }else if (item.className.split(/\s+/).indexOf(obj) === -1){
-                    (function(obj) {
-                        item.className += ' ' + obj;
-                    })(obj);
-                }
-            }
+            var clazz = item.getAttribute('toggle-class');
+            item.className += ' ' + clazz;
         });
     };
 
@@ -217,14 +207,17 @@
         Array.prototype.forEach.call(items, function (item) {
             var clazz = item.getAttribute('toggle-class').split(/\s+/);
             for (var i = 0; i < clazz.length; i++) {
-                var obj = clazz[i];
-                if (item.classList){
-                    item.classList.remove(obj);
-                }else{
-                    item.className = item.className.replace(new RegExp( '\\s*'+ obj, 'g' ), '');
-                }
+                item.className = item.className.replace(new RegExp( '\\s*'+ clazz[i], 'g' ), '');
             }
         });
+    };
+
+    /**
+     * show next page
+     */
+    Swiper.prototype.next = function () {
+        this._prev = this._current;
+        this._show(++this._current);
     };
 
     /**

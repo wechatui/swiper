@@ -76,19 +76,16 @@
             background-color: #4285f4;
         }
     </style>
+    <link rel="stylesheet" href="./mocha.css"/>
     <style>
         #mocha{
             position: fixed;
-            left: 0;
+            z-index: 1024;
+            top: 0;
+            right: 0;
             bottom: 0;
-            width: 100%;
-            background: #ffffff;
-            z-index: 99;
-        }
-        #mocha-stats{
-            top: auto;
-            bottom: 100px;
-            background: #ffffff;
+            left: 0;
+            background-color: #fff;
         }
     </style>
 </head>
@@ -111,24 +108,18 @@
         <h1 class="xx" toggle-class="slide_in">jf</h1>
     </div>
 </div>
-<script src="./chai.js"></script>
 <script src="./mocha.js"></script>
 <script src="../dist/swiper.js"></script>
 <script>
     mocha.setup({ui: 'bdd'});
-    var assert = chai.assert;
-
-    describe('Swiper', function () {
-        it('Swiper should have create', function () {
-            assert.isFunction(Swiper, 'Swiper is a function');
-        });
-
-        it('I do not know do what', function () {
-            var swiper = new Swiper();
-            var $slider = document.querySelector('.swiper');
-        });
-    });
-
+    function assert(expr, msg){
+        if(!expr){
+            throw new Error(msg || 'failed');
+        }
+    }
+</script>
+<script src="./test.js"></script>
+<script>
     mocha.run();
 </script>
 </body>
