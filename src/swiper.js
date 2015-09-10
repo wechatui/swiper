@@ -17,7 +17,7 @@
      * @constructor
      */
     function Swiper(options){
-        this.version = '1.2.0';
+        this.version = '2.0.1';
         this._default = {container: '.swiper', item: '.item', direction: 'vertical', threshold: 50, duration: 300};
         this._options = extend(this._default, options);
         this._start = {};
@@ -26,7 +26,6 @@
         this._prev = 0;
         this._current = 0;
         this._offset = 0;
-        this._eventHandlers = {};
         this._cache = {};
 
         this.$container = document.querySelector(this._options.container);
@@ -49,7 +48,6 @@
         var width = me._width;
         var height = me._height;
 
-
         var w = width;
         var h = height * me.count;
 
@@ -64,8 +62,9 @@
         Array.prototype.forEach.call(me.$items, function ($item, key) {
             $item.style.width = width + 'px';
             $item.style.height = height + 'px';
-            me._getItems(key);
         });
+
+        me.$items[0].classList.add('active');
     };
 
     /**
@@ -113,9 +112,10 @@
             }
 
             me._prev = me._current;
-            if (distance > me._options.threshold){
+            if (distance >= me._options.threshold){
                 me._current = me._current === 0 ? 0 : --me._current;
-            }else if (distance < - me._options.threshold){
+            }
+            else if (distance < - me._options.threshold){
                 me._current = me._current < (me.count - 1) ? ++me._current : me._current;
             }
 
@@ -133,35 +133,15 @@
                 return false;
             }
 
-            var prev = me._getItems(me._prev);
-            var current = me._getItems(me._current);
             if (me._current != me._prev) {
-                var cb = me._eventHandlers.swiped;
-                if (cb){
-                    cb.apply(me, [me._prev, me._current]);
-                }
-
-                me._addClass(current);
-                me._removeClass(prev);
+                me.$items[me._current].classList.add('active');
+                me.$items[me._prev].classList.remove('active');
             }else{
-                me._addClass(current);
+
             }
 
             e.preventDefault();
         }, false);
-    };
-
-    /**
-     * get toggle-class items
-     * @param key
-     * @returns {Array}
-     * @private
-     */
-    Swiper.prototype._getItems = function (key) {
-        if (!this._cache[key]){
-            this._cache[key] = this.$items[key].querySelectorAll('*[toggle-class]');
-        }
-        return this._cache[key];
     };
 
     /**
@@ -184,58 +164,6 @@
         this.$container.style.transition = duration;
         this.$container.style['-webkit-transform'] = transform;
         this.$container.style.transform = transform;
-    };
-
-    /**
-     * add class
-     * @param items
-     * @private
-     */
-    Swiper.prototype._addClass = function (items) {
-        Array.prototype.forEach.call(items, function (item) {
-            var clazz = item.getAttribute('toggle-class');
-            item.className += ' ' + clazz;
-        });
-    };
-
-    /**
-     * remove class
-     * @param items
-     * @private
-     */
-    Swiper.prototype._removeClass = function (items) {
-        Array.prototype.forEach.call(items, function (item) {
-            var clazz = item.getAttribute('toggle-class').split(/\s+/);
-            for (var i = 0; i < clazz.length; i++) {
-                item.className = item.className.replace(new RegExp( '\\s*'+ clazz[i], 'g' ), '');
-            }
-        });
-    };
-
-    /**
-     * show next page
-     */
-    Swiper.prototype.next = function () {
-        this._prev = this._current;
-        this._show(++this._current);
-    };
-
-    /**
-     *
-     * @param {String} event
-     * @param {Function} callback
-     */
-    Swiper.prototype.on = function (event, callback) {
-        if(this._eventHandlers[event]){
-            throw 'event ' + event + ' is already register';
-        }
-        if (typeof callback !== 'function'){
-            throw 'parameter callback must be a function';
-        }
-
-        this._eventHandlers[event] = callback;
-
-        return this;
     };
 
     /**
