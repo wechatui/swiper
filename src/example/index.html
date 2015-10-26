@@ -3,28 +3,35 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-    <title>albums</title>
-    <link rel="stylesheet" href="http://daneden.github.io/animate.css/animate.min.css"/>
+    <title>swiper</title>
+    <link rel="stylesheet" href="../swiper.css"/>
     <link rel="stylesheet" href="example.css"/>
 </head>
 <body>
-
+<div class="container">
     <div class="swiper">
         <div class="item item1">
-            <h1 class="title" toggle-class="bounceInLeft animated">i am bear</h1>
-            <p class="signature" data-delay="1000" toggle-class="bounceInLeft animated">bear is x</p>
-            <p class="signature2" data-delay="2000" toggle-class="lightSpeedIn animated">x is bear</p>
+            <h1 class="title">i am bear</h1>
+
+            <p class="signature">bear is x</p>
+
+            <p class="signature2">x is bear</p>
         </div>
         <div class="item item2">
-            <h1 class="title" toggle-class="bounceInRight animated">i am jf</h1>
-            <p class="signature" data-delay="1000" toggle-class="bounceInLeft animated">hello</p>
-            <p class="signature2" data-delay="2000" toggle-class="lightSpeedIn animated">word</p>
+            <h1 class="title">i am jf</h1>
+
+            <p class="signature">hello</p>
+
+            <p class="signature2">word</p>
         </div>
     </div>
-
-    <script src="../swiper.js"></script>
-    <script>
-        var swiper = new Swiper({});
-    </script>
+</div>
+<script src="../swiper.js"></script>
+<script>
+    var swiper = new Swiper();
+    swiper.on('swiped', function (prev, current){
+        console.log(prev, current);
+    });
+</script>
 </body>
 </html>

@@ -1,0 +1,14 @@
+.swiper {
+  height: 100%;
+  overflow: hidden;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+}
+.item {
+  height: 100%;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  float: left;
+}

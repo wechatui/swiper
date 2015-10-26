@@ -81,33 +81,6 @@
     });
 ```
 
-###HTML属性
-
-- toggle-class
-
-通常，制作此类页面，都是滑动时，对某些元素添加或者移除某些`class`，因此`swiper.js`支持在需要切换`class`的元素中，预先写入`toggle-class`属性。当滑动到当前屏时，自动查找拥有`toggle-class`属性的元素，并且为之添加上`toggle-class`的值，同时对上一屏中，拥有`toggle-class`属性的元素，移除`toggle-class`的值。如果需要添加或移除多个`class`，则以空格分隔。
-
-- data-delay
-
-添加class的延时时间，单位`ms`。
-
-举例：
-
-```html
-<div class="swiper">
-    <div class="item item1">
-        <!-- 当出现第一屏时，自动为以下元素添加“slide_in”类，当滑动到下一屏时，自动移除 -->
-        <h1 class="bear" toggle-class="slide_in">bear</h1>
-        <!-- 延时800ms添加class -->
-        <h2 class="bear" data-delay="800" toggle-class="slide_in">jf</h2>
-    </div>
-    <div class="item item2">
-        <!-- 同上 -->
-        <h1 class="hehe" toggle-class="slide_in">kiki</h1>
-    </div>
-</div>
-```
-
 ##体验
 
 ![](http://wechatui.github.io/swiper/images/example.jpg)
