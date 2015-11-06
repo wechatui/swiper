@@ -2,6 +2,14 @@
 
 为移动端而生的滑动框架，无依赖，轻盈小巧，性能极致
 
+## 体验
+
+扫描二维码
+
+![demo](./dist/example/qrcode.png)
+
+[http://wechatui.github.io/swiper](http://wechatui.github.io/swiper)
+
 ##安装
 
 - 你可以在<https://github.com/wechatui/swiper/releases>下载最新发布的版本
