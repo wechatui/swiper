@@ -1,7 +1,3 @@
-/**
- * Created by jfengjiang on 2015/1/13.
- */
-
 
 (function (name, definition) {
     if (typeof define === 'function') {
@@ -18,7 +14,7 @@
      */
     function Swiper(options) {
         this.version = '${version}';
-        this._default = {container: '.swiper', item: '.item', direction: 'vertical', threshold: 50, duration: 300};
+        this._default = {container: '.swiper', item: '.item', direction: 'vertical', activeClass: 'active', threshold: 50, duration: 300};
         this._options = extend(this._default, options);
         this._start = {};
         this._move = {};
@@ -27,7 +23,6 @@
         this._current = 0;
         this._offset = 0;
         this._eventHandlers = {};
-        this._cache = {};
 
         this.$container = document.querySelector(this._options.container);
         this.$items = this.$container.querySelectorAll(this._options.item);
@@ -65,6 +60,8 @@
             $item.style.width = width + 'px';
             $item.style.height = height + 'px';
         });
+
+        me._activate(0);
     };
 
     /**
@@ -124,7 +121,6 @@
         }, false);
 
         this.$container.addEventListener('transitionEnd', function (e) {
-            //do nothing
         }, false);
 
         this.$container.addEventListener('webkitTransitionEnd', function (e) {
@@ -133,6 +129,7 @@
             }
 
             if (me._current != me._prev) {
+                me._activate(me._current);
                 var cb = me._eventHandlers.swiped || noop;
                 cb.apply(me, [me._prev, me._current]);
             }
@@ -160,6 +157,21 @@
         this.$container.style.transition = duration;
         this.$container.style['-webkit-transform'] = transform;
         this.$container.style.transform = transform;
+    };
+
+    /**
+     * activate
+     * @param index
+     * @private
+     */
+    Swiper.prototype._activate = function (index){
+        var clazz = this._options.activeClass;
+        Array.prototype.forEach.call(this.$items, function ($item, key){
+            $item.classList.remove(clazz);
+            if (index === key) {
+                $item.classList.add(clazz);
+            }
+        });
     };
 
     /**

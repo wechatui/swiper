@@ -10,4 +10,17 @@
     position: relative;
     overflow: hidden;
     float: left;
+
+    &.active{
+        .animated{
+            animation-fill-mode: both;
+            opacity: 1;
+        }
+    }
+    &:not(.active){
+        .animated{
+            animation: none;
+            opacity: 0;
+        }
+    }
 }

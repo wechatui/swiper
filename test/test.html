@@ -4,22 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <title>test for swiper.js</title>
-    <link rel="stylesheet" href="./mocha.css"/>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        html,
-        body {
-            height: 100%;
-            overflow: hidden;
-        }
         .swiper {
             height: 100%;
+            overflow: hidden;
             -webkit-transition: all 0.3s ease;
-            -moz-transition: all 0.3s ease;
-            -o-transition: all 0.3s ease;
             transition: all 0.3s ease;
         }
         .item {
@@ -30,50 +19,49 @@
             overflow: hidden;
             float: left;
         }
-        h1 {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -webkit-transition: all 0.6s ease-out;
-            -moz-transition: all 0.6s ease-out;
-            -o-transition: all 0.6s ease-out;
-            transition: all 0.6s ease-out;
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container{
+            height: 100%;
+        }
+        .item{
             color: #ffffff;
         }
-        .hehe,
-        .xx {
-            -webkit-transform: translate3d(-999px, -50%, 0);
-            -moz-transform: translate3d(-999px, -50%, 0);
-            -o-transform: translate3d(-999px, -50%, 0);
-            -ms-transform: translate3d(-999px, -50%, 0);
-            transform: translate3d(-999px, -50%, 0);
+        .title{
+            margin-top: 100px;
+            text-align: center;
         }
-        .bear,
-        .xixi {
-            -webkit-transform: translate3d(999px, -50%, 0);
-            -moz-transform: translate3d(999px, -50%, 0);
-            -o-transform: translate3d(999px, -50%, 0);
-            -ms-transform: translate3d(999px, -50%, 0);
-            transform: translate3d(999px, -50%, 0);
+        .item.active .animated{
+            -webkit-animation-fill-mode: both;
+            -moz-animation-fill-mode: both;
+            -o-animation-fill-mode: both;
+            animation-fill-mode: both;
+            opacity: 1 !important;
         }
-        .slide_in {
-            -webkit-transform: translate3d(-50%, -50%, 0);
-            -moz-transform: translate3d(-50%, -50%, 0);
-            -o-transform: translate3d(-50%, -50%, 0);
-            -ms-transform: translate3d(-50%, -50%, 0);
-            transform: translate3d(-50%, -50%, 0);
+        .item:not(.active) .animated{
+            -webkit-animation: none;
+            -o-animation: none;
+            animation: none;
+            opacity: 0 !important;
         }
-        .item1 {
-            background-color: black;
+        .item1{
+            background-color: #ff6f3d;
         }
-        .item2 {
-            background-color: darkgreen;
+
+        .item2{
+            background-color: #ec6f69;
         }
-        .item3 {
-            background-color: #303030;
-        }
-        .item4 {
-            background-color: #4285f4;
+
+        .item3{
+            background-color: #d2c8ed;
         }
     </style>
     <link rel="stylesheet" href="./mocha.css"/>
@@ -91,25 +79,25 @@
 </head>
 <body>
 <div id="mocha"></div>
-<div class="swiper">
-    <div class="item item1">
-        <h1 class="bear" toggle-class="slide_in">bear</h1>
-    </div>
+<div class="container">
+    <div class="swiper">
+        <div class="item item1">
+            <h2 class="title slideInLeft animated">i am bear</h2>
+        </div>
+        <div class="item item2">
+            <h2 class="title slideInRight animated">i am jf</h2>
+        </div>
 
-    <div class="item item2">
-        <h1 class="hehe" toggle-class="slide_in">kiki</h1>
-    </div>
-
-    <div class="item item3">
-        <h1 class="xixi" toggle-class="slide_in">xx</h1>
-    </div>
-
-    <div class="item item4">
-        <h1 class="xx" toggle-class="slide_in">jf</h1>
+        <div class="item item3">
+            <h2 class="title slideInLeft animated">xxxxxxxx</h2>
+        </div>
     </div>
 </div>
 <script src="./mocha.js"></script>
 <script src="../dist/swiper.js"></script>
+<script>
+    var swiper = new Swiper();
+</script>
 <script>
     mocha.setup({ui: 'bdd'});
     function assert(expr, msg){

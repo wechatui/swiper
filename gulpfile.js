@@ -11,21 +11,14 @@ var jshint = require('gulp-jshint');
 var rename = require('gulp-rename');
 var less = require('gulp-less');
 var autoprefixer = require('gulp-autoprefixer');
+var minify = require('gulp-minify-css');
 var tap = require('gulp-tap');
 var browserSync = require('browser-sync');
 var pkg = require('./package.json');
 
-gulp.task('build', ['lint'], function () {
+gulp.task('build', function () {
     gulp.src('src/example/**/*')
         .pipe(gulp.dest('dist/example'));
-
-    gulp.src('src/swiper.less')
-        .pipe(less().on('error', function (e){
-            console.error(e.message);
-            this.emit('end');
-        }))
-        .pipe(autoprefixer())
-        .pipe(gulp.dest('dist'));
 
     var banner = ['/**',
         ' * <%= pkg.name %> - <%= pkg.description %>',
@@ -34,21 +27,38 @@ gulp.task('build', ['lint'], function () {
         ' * @license <%= pkg.license %>',
         ' */',
         ''].join('\n');
+
+    gulp.src('src/swiper.less')
+        .pipe(less().on('error', function (e){
+            console.error(e.message);
+            this.emit('end');
+        }))
+        .pipe(autoprefixer())
+        .pipe(header(banner, { pkg : pkg } ))
+        .pipe(gulp.dest('dist'))
+        .pipe(minify())
+        .pipe(header(banner, { pkg : pkg } ))
+        .pipe(rename(function (file){
+            file.basename += '.min';
+        }))
+        .pipe(gulp.dest('dist'));
+
     gulp.src('src/swiper.js')
         .pipe(tap(function(file, t){
             var contents = file.contents.toString();
             contents = contents.replace('${version}', pkg.version);
             file.contents = new Buffer(contents);
         }))
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+        .pipe(header(banner, { pkg : pkg } ))
+        .pipe(gulp.dest('dist'))
         .pipe(uglify())
         .pipe(header(banner, { pkg : pkg } ))
+        .pipe(rename(function (file){
+            file.basename += '.min';
+        }))
         .pipe(gulp.dest('dist'));
-});
-
-gulp.task('lint', function () {
-    gulp.src('src/swiper.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
 });
 
 gulp.task('server', function () {

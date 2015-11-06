@@ -12,11 +12,27 @@
 
 ```html
 <div class="swiper">
-    <div class="item item1">
-        <h1 class="bear" toggle-class="slide_in">bear</h1>
+    <div class="item">
+        <h2 class="title fadeInUp animated">它无孔不入</h2>
     </div>
-    <div class="item item2">
-        <h1 class="hehe" toggle-class="slide_in">kiki</h1>
+    <div class="item">
+        <h2 class="title fadeInUp animated">你无处可藏</h2>
+    </div>
+
+    <div class="item">
+        <h2 class="title fadeInUp animated">不是它可恶</h2>
+    </div>
+
+    <div class="item">
+        <h2 class="title fadeInUp animated">而是它不懂你</h2>
+    </div>
+
+    <div class="item">
+        <h2 class="title fadeInUp animated">我们试图</h2>
+    </div>
+
+    <div class="item">
+        <h2 class="title fadeInUp animated">做些改变</h2>
     </div>
 </div>
 <script src="../swiper.js"></script>
@@ -62,6 +78,8 @@
 
 - `direction`：String，滑动方向，默认值`vertical`；横向滑动时为`horizontal`
 
+- `activeClass`: String，当前屏激活时添加的类名；默认值`active`
+
 - `threshold`：Number，滑动距离阀值，默认值`50`，当按住屏幕滑动超过此距离，松开手时，自动滑到下一屏，否则不滑动
 
 - `duration`：Number，滑屏动画时间，单位`ms`，默认值`300`；数值越小，滑动越快，越刺激
@@ -74,18 +92,21 @@
 - `swiped`：滑动**结束时**，触发`swiped`事件，回调函数传入两个参数，分别是上一屏和当前屏索引，从`0`算起。举例，从第一屏滑动到第二屏结束时：
 
 ```javascript
-    var swiper = new Siper();
+    var swiper = new Swiper();
     swiper.on('swiped', function(prev, current){
         console.log('上一屏：', prev); // 0
         console.log('当前屏：', current); // 1
     });
 ```
 
-##体验
+### 方法
 
-![](http://wechatui.github.io/swiper/images/example.jpg)
+- `next`: 主动滑动到下一屏。
 
-![](http://wechatui.github.io/swiper/images/example2.jpg)
+```
+    var swiper = new Swiper();
+    swiper.next();
+```
 
 ##License
 

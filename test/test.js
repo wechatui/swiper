@@ -1,8 +1,3 @@
-/**
- * Created by jfengjiang on 2015/7/22.
- */
-
-var swiper = new Swiper();
 
 describe('Swiper', function () {
     it('Swiper should have create', function () {
@@ -16,19 +11,14 @@ describe('Swiper', function () {
     it('swiper should be instance of Swiper', function(){
         assert(swiper instanceof Swiper);
     });
-
-
-
 });
 
 describe('swiper should have the following methods:', function(){
     var methods = [
         '_init',
         '_bind',
-        '_getItems',
         '_show',
-        '_addClass',
-        '_removeClass',
+        '_activate',
         'next',
         'on'
     ];
@@ -46,8 +36,23 @@ describe('swiper should have the following methods:', function(){
 });
 
 describe('swiper should have the following properties', function(){
-    var properties = ['version', '_default', '_options', '_start', '_move', '_end', '_prev', '_current', '_offset', '_eventHandlers', '_cache',
-        '$container', '$items', 'count', '_width', '_height'];
+    var properties = [
+        'version',
+        '_default',
+        '_options',
+        '_start',
+        '_move',
+        '_end',
+        '_prev',
+        '_current',
+        '_offset',
+        '_eventHandlers',
+        '$container',
+        '$items',
+        'count',
+        '_width',
+        '_height'
+    ];
     for (var i = 0, len = properties.length; i < len; i++){
         (function(i){
             it('.' + properties[i] + '', function(done){
@@ -90,7 +95,6 @@ describe('.next()', function (){
         }
     });
 });
-
 
 describe('.on()', function (){
     it('swiped listener should not be empty', function (){
