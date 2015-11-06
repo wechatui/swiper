@@ -1,0 +1,7 @@
+/**
+ * swiper - swiper.js
+ * @version v1.4.0
+ * @link https://github.com/weui/swiper.git
+ * @license MIT
+ */
+.item,.swiper{height:100%;overflow:hidden}.swiper{-webkit-transition:all .3s ease;transition:all .3s ease}.item{background-position:center center;background-size:cover;position:relative;float:left}.item.active .animated{-webkit-animation-fill-mode:both;animation-fill-mode:both;opacity:1}.item:not(.active) .animated{-webkit-animation:none;animation:none;opacity:0}

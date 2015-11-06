@@ -1,24 +1,20 @@
-/**
- * Created by jfengjiang on 2015/1/13.
- */
 
-
-(function(name, definition) {
-    if (typeof define === 'function'){
+(function (name, definition) {
+    if (typeof define === 'function') {
         define(definition);
     } else {
         this[name] = definition();
     }
-})('Swiper', function(){
+})('Swiper', function () {
 
     /**
      *
      * @param options
      * @constructor
      */
-    function Swiper(options){
-        this.version = '1.2.0';
-        this._default = {container: '.swiper', item: '.item', direction: 'vertical', threshold: 50, duration: 300};
+    function Swiper(options) {
+        this.version = '${version}';
+        this._default = {container: '.swiper', item: '.item', direction: 'vertical', activeClass: 'active', threshold: 50, duration: 300};
         this._options = extend(this._default, options);
         this._start = {};
         this._move = {};
@@ -27,7 +23,6 @@
         this._current = 0;
         this._offset = 0;
         this._eventHandlers = {};
-        this._cache = {};
 
         this.$container = document.querySelector(this._options.container);
         this.$items = this.$container.querySelectorAll(this._options.item);
@@ -41,10 +36,10 @@
     }
 
     /**
-     *
+     * initial
      * @private
      */
-    Swiper.prototype._init = function(){
+    Swiper.prototype._init = function () {
         var me = this;
         var width = me._width;
         var height = me._height;
@@ -53,7 +48,7 @@
         var w = width;
         var h = height * me.count;
 
-        if(me._options.direction === 'horizontal'){
+        if (me._options.direction === 'horizontal') {
             w = width * me.count;
             h = height;
         }
@@ -64,15 +59,16 @@
         Array.prototype.forEach.call(me.$items, function ($item, key) {
             $item.style.width = width + 'px';
             $item.style.height = height + 'px';
-            me._getItems(key);
         });
+
+        me._activate(0);
     };
 
     /**
-     *
+     * bind event listener
      * @private
      */
-    Swiper.prototype._bind = function(){
+    Swiper.prototype._bind = function () {
         var me = this;
 
         this.$container.addEventListener('touchstart', function (e) {
@@ -91,7 +87,7 @@
             var distance = me._move.y - me._start.y;
             var transform = 'translate3d(0, ' + (distance - me._offset) + 'px, 0)';
 
-            if (me._options.direction === 'horizontal'){
+            if (me._options.direction === 'horizontal') {
                 distance = me._move.x - me._start.x;
                 transform = 'translate3d(' + (distance - me._offset) + 'px, 0, 0)';
             }
@@ -108,14 +104,14 @@
 
 
             var distance = me._end.y - me._start.y;
-            if (me._options.direction === 'horizontal'){
+            if (me._options.direction === 'horizontal') {
                 distance = me._end.x - me._start.x;
             }
 
             me._prev = me._current;
-            if (distance > me._options.threshold){
+            if (distance > me._options.threshold) {
                 me._current = me._current === 0 ? 0 : --me._current;
-            }else if (distance < - me._options.threshold){
+            } else if (distance < -me._options.threshold) {
                 me._current = me._current < (me.count - 1) ? ++me._current : me._current;
             }
 
@@ -125,43 +121,20 @@
         }, false);
 
         this.$container.addEventListener('transitionEnd', function (e) {
-            //do nothing
         }, false);
 
         this.$container.addEventListener('webkitTransitionEnd', function (e) {
-            if (e.target !== me.$container){
+            if (e.target !== me.$container) {
                 return false;
             }
 
-            var prev = me._getItems(me._prev);
-            var current = me._getItems(me._current);
             if (me._current != me._prev) {
-                var cb = me._eventHandlers.swiped;
-                if (cb){
-                    cb.apply(me, [me._prev, me._current]);
-                }
-
-                me._addClass(current);
-                me._removeClass(prev);
-            }else{
-                me._addClass(current);
+                me._activate(me._current);
+                var cb = me._eventHandlers.swiped || noop;
+                cb.apply(me, [me._prev, me._current]);
             }
-
             e.preventDefault();
         }, false);
-    };
-
-    /**
-     * get toggle-class items
-     * @param key
-     * @returns {Array}
-     * @private
-     */
-    Swiper.prototype._getItems = function (key) {
-        if (!this._cache[key]){
-            this._cache[key] = this.$items[key].querySelectorAll('*[toggle-class]');
-        }
-        return this._cache[key];
     };
 
     /**
@@ -173,7 +146,7 @@
         this._offset = index * this._height;
         var transform = 'translate3d(0, -' + this._offset + 'px, 0)';
 
-        if (this._options.direction === 'horizontal'){
+        if (this._options.direction === 'horizontal') {
             this._offset = index * this._width;
             transform = 'translate3d(-' + this._offset + 'px, 0, 0)';
         }
@@ -187,27 +160,16 @@
     };
 
     /**
-     * add class
-     * @param items
+     * activate
+     * @param index
      * @private
      */
-    Swiper.prototype._addClass = function (items) {
-        Array.prototype.forEach.call(items, function (item) {
-            var clazz = item.getAttribute('toggle-class');
-            item.className += ' ' + clazz;
-        });
-    };
-
-    /**
-     * remove class
-     * @param items
-     * @private
-     */
-    Swiper.prototype._removeClass = function (items) {
-        Array.prototype.forEach.call(items, function (item) {
-            var clazz = item.getAttribute('toggle-class').split(/\s+/);
-            for (var i = 0; i < clazz.length; i++) {
-                item.className = item.className.replace(new RegExp( '\\s*'+ clazz[i], 'g' ), '');
+    Swiper.prototype._activate = function (index){
+        var clazz = this._options.activeClass;
+        Array.prototype.forEach.call(this.$items, function ($item, key){
+            $item.classList.remove(clazz);
+            if (index === key) {
+                $item.classList.add(clazz);
             }
         });
     };
@@ -216,8 +178,12 @@
      * show next page
      */
     Swiper.prototype.next = function () {
+        if (this._current >= this.count - 1) {
+            return;
+        }
         this._prev = this._current;
         this._show(++this._current);
+        return this;
     };
 
     /**
@@ -226,11 +192,11 @@
      * @param {Function} callback
      */
     Swiper.prototype.on = function (event, callback) {
-        if(this._eventHandlers[event]){
-            throw 'event ' + event + ' is already register';
+        if (this._eventHandlers[event]) {
+            throw new Error('event ' + event + ' is already register');
         }
-        if (typeof callback !== 'function'){
-            throw 'parameter callback must be a function';
+        if (typeof callback !== 'function') {
+            throw new Error('parameter callback must be a function');
         }
 
         this._eventHandlers[event] = callback;
@@ -239,17 +205,24 @@
     };
 
     /**
-     *
+     * simple `extend` method
      * @param target
      * @param source
      * @returns {*}
      */
     function extend(target, source) {
-        for(var key in source){
+        for (var key in source) {
             target[key] = source[key];
         }
 
         return target;
+    }
+
+    /**
+     * noop
+     */
+    function noop() {
+
     }
 
     /**
