@@ -116,6 +116,12 @@
     swiper.next();
 ```
 
+- `go`: 主动滑动到指定界面。
+
+```
+    var swiper = new Swiper();
+    swiper.go(1);
+```
 ##License
 
 swiper is available under the terms of the [MIT License](http://www.opensource.org/licenses/mit-license.php).
