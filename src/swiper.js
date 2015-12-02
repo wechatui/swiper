@@ -22,6 +22,7 @@
         this._prev = 0;
         this._current = 0;
         this._offset = 0;
+        this._goto = -1;
         this._eventHandlers = {};
 
         this.$container = document.querySelector(this._options.container);
@@ -128,10 +129,11 @@
                 return false;
             }
 
-            if (me._current != me._prev) {
+            if (me._current != me._prev || me._goto > -1) {
                 me._activate(me._current);
                 var cb = me._eventHandlers.swiped || noop;
                 cb.apply(me, [me._prev, me._current]);
+                me._goto = -1;
             }
             e.preventDefault();
         }, false);
@@ -172,6 +174,28 @@
                 $item.classList.add(clazz);
             }
         });
+    };
+
+    /**
+     * goto x page
+     */
+    Swiper.prototype.go = function (index) {
+        if(index < 0 || index > this.count - 1 || index === this._current){
+            return;
+        }
+        
+        if (index === 0) {
+            this._current = 0;
+            this._prev = 0;
+        }else{
+            this._current = index;
+            this._prev = index - 1;
+        }
+
+        this._goto = index;
+        this._show(this._current);
+
+        return this;
     };
 
     /**
