@@ -1,6 +1,6 @@
 {
-  "name": "swiper",
-  "version": "1.4.0",
+  "name": "iswiper",
+  "version": "1.4.1",
   "description": "swiper.js",
   "author": "wechat ui team",
   "scripts": {

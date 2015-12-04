@@ -118,7 +118,6 @@
 
             me._show(me._current);
 
-            e.preventDefault();
         }, false);
 
         this.$container.addEventListener('transitionEnd', function (e) {
