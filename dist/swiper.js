@@ -1,6 +1,6 @@
 /**
- * swiper - swiper.js
- * @version v1.4.0
+ * iswiper - swiper.js
+ * @version v1.4.1
  * @link https://github.com/weui/swiper.git
  * @license MIT
  */
@@ -19,7 +19,7 @@
      * @constructor
      */
     function Swiper(options) {
-        this.version = '1.4.0';
+        this.version = '1.4.1';
         this._default = {container: '.swiper', item: '.item', direction: 'vertical', activeClass: 'active', threshold: 50, duration: 300};
         this._options = extend(this._default, options);
         this._start = {};
@@ -124,7 +124,6 @@
 
             me._show(me._current);
 
-            e.preventDefault();
         }, false);
 
         this.$container.addEventListener('transitionEnd', function (e) {

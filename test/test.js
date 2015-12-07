@@ -63,23 +63,6 @@ describe('swiper should have the following properties', function(){
     }
 });
 
-describe('it should add classes to dom', function(){
-    var $slider = swiper.$items[swiper._current];
-    var $items = $slider.querySelectorAll('*[toggle-class]');
-    Array.prototype.forEach.call($items, function($item, index){
-        var clazz = $item.getAttribute('toggle-class').split(/\s+/);
-        for(var i = 0, len = clazz.length; i < len; i++){
-            (function(i){
-                it('.' + clazz, function(done){
-                    setTimeout(function(){
-                        assert($item.className.indexOf(clazz[i]) !== -1);
-                        done();
-                    }, 1000);
-                });
-            })(i);
-        }
-    });
-});
 
 describe('.next()', function (){
     it('should translateY the container to the slide height & should add classes to dom', function (){
@@ -87,6 +70,20 @@ describe('.next()', function (){
 
         for(var i = 1, len = swiper.$items.length; i < len; i++){
             swiper.next();
+            var height = swiper.$items[i].style['height'].replace('px', '');
+            var expect = 'translate3d(0px, -'+ (height * i) +'px, 0px)';
+
+            assert(swiper._current === i);
+            assert(swiper.$container.style['-webkit-transform'] === expect);
+        }
+    });
+});
+
+describe('.go()', function (){
+    it('should translateY the container to the slide height & should add classes to dom', function (){
+        swiper.go(0);
+        for(var i = 1, len = swiper.$items.length; i < len; i++){
+            swiper.go(i);
             var height = swiper.$items[i].style['height'].replace('px', '');
             var expect = 'translate3d(0px, -'+ (height * i) +'px, 0px)';
 
