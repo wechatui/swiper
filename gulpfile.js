@@ -20,7 +20,7 @@ gulp.task('build', function () {
     gulp.src('src/example/**/*')
         .pipe(gulp.dest('dist/example'));
 
-    var banner = ['/**',
+    var banner = ['/*!',
         ' * <%= pkg.name %> - <%= pkg.description %>',
         ' * @version v<%= pkg.version %>',
         ' * @link <%= pkg.repository.url %>',
@@ -37,7 +37,6 @@ gulp.task('build', function () {
         .pipe(header(banner, { pkg : pkg } ))
         .pipe(gulp.dest('dist'))
         .pipe(minify())
-        .pipe(header(banner, { pkg : pkg } ))
         .pipe(rename(function (file){
             file.basename += '.min';
         }))
@@ -54,7 +53,6 @@ gulp.task('build', function () {
         .pipe(header(banner, { pkg : pkg } ))
         .pipe(gulp.dest('dist'))
         .pipe(uglify())
-        .pipe(header(banner, { pkg : pkg } ))
         .pipe(rename(function (file){
             file.basename += '.min';
         }))

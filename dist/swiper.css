@@ -1,4 +1,4 @@
-/**
+/*!
  * iswiper - swiper.js
  * @version v1.4.1
  * @link https://github.com/weui/swiper.git
