@@ -1,38 +1,39 @@
 {
-  "name": "iswiper",
-  "description": "为移动端而生的滑动框架，无依赖，轻盈小巧，性能极致",
-  "version": "1.4.0",
-  "author": "wechat ui team",
-  "keywords": [
-    "iswiper",
-    "swiper",
-    "swipe",
-    "slider",
-    "mobile",
-    "framework"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wechatui/swiper.git"
-  },
-  "homepage": "http://wechatui.github.io/swiper",
-  "scripts": [
-    "dist/swiper.js"
-  ],
-  "main": [
-    "dist/swiper.js"
-  ],
-  "ignore": [
-    "/.*",
-    "gulpfile.js",
-    "node_modules",
-    "package.json",
-    "**/.*",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "license": [
-    "MIT"
-  ]
+    "name": "iswiper",
+    "description": "为移动端而生的滑动框架，无依赖，轻盈小巧，性能极致",
+    "version": "1.4.2",
+    "author": "wechat ui team",
+    "keywords": [
+        "wechat",
+        "iswiper",
+        "swiper",
+        "swipe",
+        "slider",
+        "mobile",
+        "framework"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wechatui/swiper.git"
+    },
+    "homepage": "http://wechatui.github.io/swiper",
+    "scripts": [
+        "dist/swiper.js"
+    ],
+    "main": [
+        "dist/swiper.js"
+    ],
+    "ignore": [
+        "/.*",
+        "gulpfile.js",
+        "node_modules",
+        "package.json",
+        "**/.*",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "license": [
+        "MIT"
+    ]
 }
