@@ -1,5 +1,7 @@
 ##swiper
 
+[![Join the chat at https://gitter.im/wechatui/swiper](https://badges.gitter.im/wechatui/swiper.svg)](https://gitter.im/wechatui/swiper?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 为移动端而生的滑动框架，无依赖，轻盈小巧，性能极致
 
 ## 体验
