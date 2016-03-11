@@ -6,7 +6,7 @@
 
 扫描二维码
 
-![demo](./dist/example/qrcode.png)
+![demo](https://cloud.githubusercontent.com/assets/4652816/13709283/1052c01a-e7ee-11e5-959c-1095114739db.png)
 
 [http://wechatui.github.io/swiper](http://wechatui.github.io/swiper)
 

@@ -20,6 +20,7 @@ describe('swiper should have the following methods:', function(){
         '_show',
         '_activate',
         'next',
+        'go',
         'on'
     ];
     var i = 0;
@@ -38,7 +39,6 @@ describe('swiper should have the following methods:', function(){
 describe('swiper should have the following properties', function(){
     var properties = [
         'version',
-        '_default',
         '_options',
         '_start',
         '_move',
