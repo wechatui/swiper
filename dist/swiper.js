@@ -118,12 +118,13 @@
             me._prev = me._current;
             if (distance > me._options.threshold) {
                 me._current = me._current === 0 ? 0 : --me._current;
+                me._show(me._current);
+                e.preventDefault();
             } else if (distance < -me._options.threshold) {
                 me._current = me._current < (me.count - 1) ? ++me._current : me._current;
+                me._show(me._current);
+                e.preventDefault();
             }
-
-            me._show(me._current);
-
         }, false);
 
         this.$container.addEventListener('transitionEnd', function (e) {
@@ -188,7 +189,7 @@
         if(index < 0 || index > this.count - 1 || index === this._current){
             return;
         }
-        
+
         if (index === 0) {
             this._current = 0;
             this._prev = 0;
