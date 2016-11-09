@@ -118,30 +118,13 @@
             me._prev = me._current;
             if (distance > me._options.threshold) {
                 me._current = me._current === 0 ? 0 : --me._current;
-                me._show(me._current);
                 e.preventDefault();
             } else if (distance < -me._options.threshold) {
                 me._current = me._current < (me.count - 1) ? ++me._current : me._current;
-                me._show(me._current);
                 e.preventDefault();
             }
-        }, false);
 
-        this.$container.addEventListener('transitionEnd', function (e) {
-        }, false);
-
-        this.$container.addEventListener('webkitTransitionEnd', function (e) {
-            if (e.target !== me.$container) {
-                return false;
-            }
-
-            if (me._current != me._prev || me._goto > -1) {
-                me._activate(me._current);
-                var cb = me._eventHandlers.swiped || noop;
-                cb.apply(me, [me._prev, me._current]);
-                me._goto = -1;
-            }
-            e.preventDefault();
+            me._show(me._current);
         }, false);
     };
 
@@ -153,6 +136,7 @@
     Swiper.prototype._show = function (index) {
         this._offset = index * this._height;
         var transform = 'translate3d(0, -' + this._offset + 'px, 0)';
+        var me = this;
 
         if (this._options.direction === 'horizontal') {
             this._offset = index * this._width;
@@ -165,6 +149,17 @@
         this.$container.style.transition = duration;
         this.$container.style['-webkit-transform'] = transform;
         this.$container.style.transform = transform;
+
+        clearTimeout(this._timeout);
+        this._timeout = setTimeout(function(){
+            if (me._current != me._prev || me._timeout !== null || me._goto > -1) {
+                me._activate(me._current);
+                var cb = me._eventHandlers.swiped || noop;
+                cb.apply(me, [me._prev, me._current]);
+                me._goto = -1;
+                me._timeout = null;
+            }
+        }, this._options.duration);
     };
 
     /**
