@@ -45,7 +45,7 @@
 </div>
 <script src="../swiper.js"></script>
 <script>
-    var swpier = new Swiper();
+    var swiper = new Swiper();
 </script>
 ```
 
